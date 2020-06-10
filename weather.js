@@ -6,11 +6,14 @@ function printMessage(location, temperature, description) {
     `Today in ${location} it is ${temperature} degrees with ${description}.`
   );
 }
+function tempConvert(t){
+  return Math.floor(t * (9/5) - 459.67)
+}
 
 function get(location) {
   try {
     const request = https.get(
-      `https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=01dca2b05ee4bb1b44311bfc21622618`,
+      `https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=${apiKey}`,
       (response) => {
         if (response.statusCode === 200) {
           let body = "";
@@ -23,7 +26,7 @@ function get(location) {
               const weather = JSON.parse(body);
               printMessage(
                 weather.name,
-                weather.main.temp,
+                tempConvert(weather.main.temp),
                 weather.weather[0].description
               );
             } catch (e) {
