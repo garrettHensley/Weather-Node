@@ -34,7 +34,8 @@ function get(location) {
             }
           });
         } else {
-          console.log("we had a prolem");
+          console.log("Entered an invalid City");
+          console.log("Example 'node app.js Miami'")
         }
         response.on("error", (error) => {
           console.log("try again");
